@@ -1,0 +1,50 @@
+definitions:
+  login_api.LoginRequest:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  res.Response:
+    properties:
+      code:
+        type: integer
+      data: {}
+      msg:
+        type: string
+    type: object
+host: 127.0.0.1:8080
+info:
+  contact: {}
+  description: estarexchange的API文档
+  title: estarexchange API文档
+  version: V1.0
+paths:
+  /api/login:
+    post:
+      description: 登录
+      parameters:
+      - description: 登录
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/login_api.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/res.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 登录
+swagger: "2.0"

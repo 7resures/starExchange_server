@@ -1,0 +1,27 @@
+mysql:
+  host: 127.0.0.1
+  port: 3306
+  config: 'charset=utf8mb4&parseTime=True&loc=Local'
+  db: e_star
+  user: root
+  password: 'lfy123537143.'
+  log_level: dev
+logger:
+  level: info
+  prefix: '[e_star]'
+  director: log
+  show_line: true
+  log_in_console: true
+system:
+  host: 0.0.0.0
+  port: 8080
+  env: release
+upload:
+  path: uploadFile/images
+  size: 1
+jwt:
+  secret_key: "123123"  # 密钥，用于签名和验证JWT
+  expiration_time: 60         # JWT过期时间，单位为秒（此处表示1小时）
+  issuer: "EStarExchange"       # JWT发行者，用于标识令牌的来源
+  refresh_token_expiration_time: 3600  # 刷新令牌的过期时间（24小时）
+
