@@ -26,6 +26,8 @@ func InitRouter() *gin.Engine {
 	routerGroupApp := RouterGroup{apiRouterGroup}
 	routerGroupApp.LoginGroupApi()
 	routerGroupApp.ImagesUploadGroupApi()
+	routerGroupApp.UserInfoGroupApi()
+	routerGroupApp.AdviseGroupApi()
 
 	//后台管理相关API
 	adminRouterGroup := router.Group("admin")

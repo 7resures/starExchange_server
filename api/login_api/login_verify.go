@@ -9,14 +9,14 @@ import (
 )
 
 // 登录请求参数的结构体
-type LoginRequest struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
-	Campus   string `json:"campus"`
-	Nickname string `json:"nickname"`
-	Avatar   string `json:"avatar"`
-	Wechat   string `json:"wechat"`
-}
+//type LoginRequest struct {
+//	Username string `json:"username"`
+//	Password string `json:"password"`
+//	Campus   string `json:"campus"`
+//	Nickname string `json:"nickname"`
+//	Avatar   string `json:"avatar"`
+//	Wechat   string `json:"wechat"`
+//}
 
 // LoginVerify 用户登录
 // @Tag 登录
@@ -39,14 +39,13 @@ func (LoginApi) LoginVerify(c *gin.Context) {
 		res.FailWithMessage("用户名或者密码未输入,请重试!", c)
 		return
 	}
-
 	var user models.User
 	// 如果是微信授权登录，走这里，因为如果是账号登录，一定不会有wechat字段，如果有wechat字段，一定是授权登录
 	// 如果是微信授权登录，那么有两种可能
 	// 1，该授权的微信已经绑定设置过校园信息
 	// 2. 该授权的微信为绑定设置过校园信息
-	if req.WeChat != "" {
-		result := global.Db.Where("we_chat = ?", req.WeChat).Find(&user)
+	if req.WeChatId != "" {
+		result := global.Db.Where("we_chat_id = ?", req.WeChatId).Find(&user)
 		if result.RowsAffected <= 0 {
 			err := global.Db.Create(&req).Error
 			if err != nil {
@@ -68,7 +67,7 @@ func (LoginApi) LoginVerify(c *gin.Context) {
 		} else {
 			// 代表该用户已经创建过用户直接进行登录
 			UserInfo := utils.JwtInfo{
-				Username: req.WeChat,
+				Username: req.WeChatId,
 				Role:     0,
 				//Role 0 代表未绑定校园信息的用户
 				//Role 1 代表已绑定校园信息的用户

@@ -6,4 +6,5 @@ type Config struct {
 	System System `yaml:"system"`
 	Upload Upload `yaml:"upload"`
 	Jwt    Jwt    `yaml:"jwt"`
+	Wx     Wx     `yaml:"wx"`
 }

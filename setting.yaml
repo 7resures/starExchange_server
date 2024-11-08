@@ -18,10 +18,14 @@ system:
   env: release
 upload:
   path: uploadFile/images
-  size: 1
+  size: 2
 jwt:
   secret_key: "123123"  # 密钥，用于签名和验证JWT
-  expiration_time: 60         # JWT过期时间，单位为秒（此处表示1小时）
+  expiration_time: 3600         # JWT过期时间，单位为秒（此处表示1小时）
   issuer: "EStarExchange"       # JWT发行者，用于标识令牌的来源
-  refresh_token_expiration_time: 3600  # 刷新令牌的过期时间（24小时）
+  refresh_token_expiration_time: 86400  # 刷新令牌的过期时间（24小时）
+wx:
+  appid: 'wx1148dd8990fe6927'
+  secret: '4b33d0b1f6179dcd622dc171b3c97536'
+
 
