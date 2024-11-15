@@ -20,8 +20,10 @@ func main() {
 	global.Log = core.InitLogger()
 	//初始化gorm配置，连接mysql数据库
 	global.Db = core.InitGorm()
-
+	//连接redis
+	global.Rdb = core.ConnectRedis()
 	//迁移表结构
+	//go services.SyncBrowseCountsToDatabase()
 	//控制台输入 go run main.go -db
 	option := flag.Parse()
 	if flag.IsWebStop(option) {

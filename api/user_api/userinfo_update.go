@@ -18,12 +18,12 @@ func (UserApi) UserInfoUpdate(c *gin.Context) {
 		return
 	}
 
-	confirm := global.Db.Where("username = ? or we_chat_id = ? ", req.Username, req.WeChatId).First(&models.User{})
+	confirm := global.Db.Where("username = ? or we_chat_id = ? and we_chat_id != '' ", req.Username, req.WeChatId).First(&models.User{})
 	if confirm.RowsAffected <= 0 {
 		res.FailWithMessage("非法用户", c)
 		return
 	}
-	result := global.Db.Where("username = ? or we_chat_id = ? ", req.Username, req.WeChatId).Updates(models.User{
+	result := global.Db.Where("username = ? or we_chat_id = ? and we_chat_id != '' ", req.Username, req.WeChatId).Updates(models.User{
 		Username:    req.Username,
 		Nickname:    req.Nickname,
 		CampusName:  req.CampusName,

@@ -1,6 +1,7 @@
 package config
 
 type Upload struct {
-	Path string  `yaml:"path"`
-	Size float64 `yaml:"size"`
+	Avatar string  `yaml:"avatar"`
+	Image  string  `yaml:"image"`
+	Size   float64 `yaml:"size"`
 }

@@ -19,9 +19,11 @@ func (LoginApi) RegisterHandler(c *gin.Context) {
 	}
 	// 检查用户是否存在，将用户信息插入到数据库中
 	username := req.Username
+	fmt.Println(req.Password)
 	req.Password = utils.MD5([]byte(req.Password))
+	fmt.Println(req.Password)
 	checkUsername := global.Db.Where("username = ?", username).First(&models.User{})
-	if checkUsername.Error == nil && checkUsername.RowsAffected > 0 {
+	if checkUsername.RowsAffected > 0 {
 		res.FailWithMessage(fmt.Sprintf("该用户 %s 已经存在", username), c)
 		return
 	} else {

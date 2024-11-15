@@ -13,7 +13,10 @@ func (AdviseApi) AdviseCreate(c *gin.Context) {
 		res.FailWithMessage(err.Error(), c)
 		return
 	}
-	result := global.Db.Create(&req)
+	result := global.Db.Create(&models.Advise{
+		UserId:        req.UserId,
+		AdviseContent: req.AdviseContent,
+	})
 	if result.RowsAffected == 0 {
 		res.FailWithMessage("提交失败", c)
 		return

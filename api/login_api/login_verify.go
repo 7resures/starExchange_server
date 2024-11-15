@@ -5,6 +5,7 @@ import (
 	"EStarExchange/models"
 	"EStarExchange/router/res"
 	utils "EStarExchange/util"
+	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
@@ -89,6 +90,7 @@ func (LoginApi) LoginVerify(c *gin.Context) {
 		return
 	}
 	md5Pwd := utils.MD5([]byte(req.Password))
+	fmt.Println(md5Pwd)
 	result = global.Db.Where("username = ? and password = ?", req.Username, md5Pwd).First(&user)
 	if result.Error != nil {
 		res.FailWithMessage("密码错误", c)
@@ -99,7 +101,6 @@ func (LoginApi) LoginVerify(c *gin.Context) {
 		res.FailWithMessage("归属校园错误", c)
 		return
 	}
-
 	UserInfo := utils.JwtInfo{
 		Username: user.Username,
 		Role:     1,

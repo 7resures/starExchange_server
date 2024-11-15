@@ -6,3 +6,10 @@ type Page struct {
 	Key        string `form:"key"`
 	Sort       string `form:"sort"`
 }
+
+type ImageRes struct {
+	Status    bool   `json:"status"`
+	ImageId   int    `json:"imageId"`
+	ImageName string `json:"imageName"`
+	Message   string `json:"message"`
+}

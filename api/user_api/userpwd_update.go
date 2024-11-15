@@ -5,7 +5,6 @@ import (
 	"EStarExchange/models"
 	"EStarExchange/router/res"
 	utils "EStarExchange/util"
-	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,7 +16,6 @@ func (UserApi) UserPwdUpdate(c *gin.Context) {
 	}
 
 	hashSecret := utils.MD5([]byte(req.Password))
-	fmt.Println(req.Username, "------------------------")
 	result := global.Db.Where("username = ?", req.Username).Updates(models.User{
 		Password: hashSecret,
 	})

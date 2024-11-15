@@ -36,6 +36,10 @@ func OkWithData(data any, c *gin.Context) {
 	Result(SUCCESS, data, "查询成功", c)
 }
 
+func FailWithData(data any, c *gin.Context) {
+	Result(unSUCCESS, data, "查询成功", c)
+}
+
 func OkWithDetailed(data any, message string, c *gin.Context) {
 	Result(SUCCESS, data, message, c)
 }

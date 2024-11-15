@@ -1,9 +1,7 @@
 package models
 
-import "gorm.io/gorm"
-
 type Tag struct {
-	gorm.Model
+	Id       uint      `gorm:"primary_key;auto_increment" json:"id"`
 	TagName  string    `json:"tag_name"`
-	Products []Product `json:"products" gorm:"many2many:product_tags;"`
+	Products []Product `gorm:"many2many:products_tags;"`
 }

@@ -7,4 +7,5 @@ type Config struct {
 	Upload Upload `yaml:"upload"`
 	Jwt    Jwt    `yaml:"jwt"`
 	Wx     Wx     `yaml:"wx"`
+	Redis  Redis  `yaml:"redis"`
 }

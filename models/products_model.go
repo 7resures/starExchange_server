@@ -1,18 +1,17 @@
 package models
 
-import "gorm.io/gorm"
-
 type Product struct {
-	gorm.Model
-	ProductId          uint    `json:"product_id"`
-	UserID             uint    `json:"user_id"`
-	ProductName        string  `json:"product_name"`
-	ProductDescription string  `json:"product_description"`
-	ProductPrice       float64 `json:"product_price"`
-	ContactWeChat      string  `json:"contact_we_chat"`
-	ContactPhone       string  `json:"contact_phone"`
-	ContactQQ          string  `json:"contact_qq"`
-	ProductStatus      string  `json:"product_status"`
-	Images             []Image `gorm:"foreignKey:ProductID"`
-	Tags               []Tag   `gorm:"many2many:product_tags"`
+	UserId             uint    `json:"userId" form:"userId"` // 外键，关联 User 表的 Id
+	ProductId          uint    `json:"productId" form:"productId" gorm:"primary_key"`
+	ProductName        string  `json:"productName" form:"productName"`
+	ProductDescription string  `json:"productDescription" form:"productDescription"`
+	ProductPrice       float64 `json:"productPrice" form:"productPrice"`
+	ContactWeChat      string  `json:"contactWeChat" form:"contactWeChat"`
+	ContactPhone       string  `json:"contactPhone" form:"contactPhone"`
+	ContactQQ          string  `json:"contactQQ" form:"contactQQ"`
+	ProductStatus      uint    `json:"productStatus" form:"productStatus"`
+	ProductViews       uint    `json:"productViews" form:"productViews"`
+	ProductStore       uint    `json:"productStore" form:"productStore"`
+	Image              []Image `gorm:"foreignKey:ProductId;reference:ProductId"`
+	Tags               []Tag   `gorm:"many2many:products_tags;"`
 }

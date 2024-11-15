@@ -2,6 +2,7 @@ package image_api
 
 import (
 	"EStarExchange/global"
+	"EStarExchange/models"
 	"EStarExchange/router/res"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -9,28 +10,22 @@ import (
 	"path"
 )
 
-type ImageRes struct {
-	Status    bool   `json:"status"`
-	ImageId   int    `json:"imageId"`
-	ImageName string `json:"imageName"`
-	Message   string `json:"message"`
-}
-
 func (ImageApi) ImagesUplpoad(c *gin.Context) {
 	form, err := c.MultipartForm()
 	if err != nil {
 		res.FailWithMessage(err.Error(), c)
 		return
 	}
-	fileList, ok := form.File["images"]
+	fileList, ok := form.File["imageKey"]
 	if !ok {
 		res.FailWithMessage("不存在文件", c)
+		return
 	}
 
-	FileRes := []ImageRes{}
+	FileRes := []models.ImageRes{}
 
 	//判断路径是否存在，不存在则创建
-	basePath := global.Config.Upload.Path
+	basePath := global.Config.Upload.Avatar
 	_, err = os.ReadDir(basePath)
 	if err != nil {
 		err = os.MkdirAll(basePath, os.ModePerm)
@@ -43,7 +38,7 @@ func (ImageApi) ImagesUplpoad(c *gin.Context) {
 		FilePath := path.Join(basePath, file.Filename)
 		FileSize := float64(file.Size) / float64((1024 * 1024))
 		if FileSize >= global.Config.Upload.Size {
-			FileRes = append(FileRes, ImageRes{
+			FileRes = append(FileRes, models.ImageRes{
 				Status:    false,
 				ImageId:   index,
 				ImageName: file.Filename,
@@ -54,14 +49,14 @@ func (ImageApi) ImagesUplpoad(c *gin.Context) {
 		err := c.SaveUploadedFile(file, FilePath)
 		if err != nil {
 			res.FailWithMessage(err.Error(), c)
-			FileRes = append(FileRes, ImageRes{
+			FileRes = append(FileRes, models.ImageRes{
 				Status:    false,
 				ImageId:   index,
 				ImageName: file.Filename,
 				Message:   err.Error(),
 			})
 		} else {
-			FileRes = append(FileRes, ImageRes{
+			FileRes = append(FileRes, models.ImageRes{
 				Status:    true,
 				ImageId:   index,
 				ImageName: file.Filename,
