@@ -10,4 +10,5 @@ func (router RouterGroup) GoodGroupApi() {
 	router.DELETE("/goodsDelete", api.ApiGroupApp.GoodApi.GoodsInfoDelete)
 	router.POST("/goodsCollection", api.ApiGroupApp.GoodApi.GoodsCollection)
 	router.GET("/addView", api.ApiGroupApp.GoodApi.GoodsAddView)
+	router.PUT("/goodStatusUpdate", api.ApiGroupApp.GoodApi.GoodStatusUpdate)
 }

@@ -4,7 +4,6 @@ import (
 	"EStarExchange/global"
 	"EStarExchange/models"
 	"EStarExchange/router/res"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
@@ -102,7 +101,6 @@ func (GoodApi) GoodsGet(c *gin.Context) {
 		for i := range goodRes {
 			loadImagesAndTags(&goodRes[i].ImageTags, goodRes[i].GoodsInfo.ProductId)
 		}
-		fmt.Println("222222222222222222222")
 		res.OkWithData(goodRes, c)
 		return
 	}

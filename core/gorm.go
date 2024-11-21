@@ -2,6 +2,7 @@ package core
 
 import (
 	"EStarExchange/global"
+	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -26,12 +27,13 @@ func InitGorm() *gorm.DB {
 	} else {
 		mysqlLogger = logger.Default.LogMode(logger.Error)
 	}
-
+	fmt.Println(dsn)
 	//连接数据库
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
 		Logger: mysqlLogger,
 	})
 	if err != nil {
+		fmt.Println("数据库连接失败")
 		panic(err)
 		return nil
 	} else {
